@@ -1,0 +1,20 @@
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main
+{
+    public static void main(String[] args) {
+        //déclaration d'une référence pour un étudiant
+        Etudiant e1, e2, e3,e4;
+        // création d'un objet étudiant
+        e1 = new Etudiant();
+        e2 = new Etudiant();
+        e3=new Etudiant("Dupont",34);
+        float tab[]=new float[2];
+        tab[0]=12.5f;
+        tab[1]=17;
+        e4 = new Etudiant("machin",13,tab);
+        e1.afficherEtudiant();
+        e4.afficherEtudiant();
+
+    }
+}
