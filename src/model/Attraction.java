@@ -13,8 +13,7 @@ public class Attraction {
     }
 
     // Constructeur avec paramètres pour initialiser l'attraction
-    public Attraction(int id, String nom, String parc, double prixBase, String description) {
-        this.id = id;
+    public Attraction(String nom, String parc, double prixBase, String description) {
         this.nom = nom;
         this.parc = parc;
         this.prixBase = prixBase;

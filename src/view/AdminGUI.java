@@ -9,7 +9,6 @@ import java.util.List;
 import dao.AttractionDAOImpl;  // Pour l'accès aux méthodes d'AttractionDAOImpl
 import model.Attraction; // Pour utiliser la classe Attraction
 
-
 public class AdminGUI extends JFrame {
     public AdminGUI() {
         super("Interface Administrateur");
@@ -61,7 +60,10 @@ public class AdminGUI extends JFrame {
 
                 // Insérer l'attraction dans la base de données
                 AttractionDAOImpl attractionDAO = new AttractionDAOImpl();
-                attractionDAO.addAttraction(new Attraction(nom, parc, prix, description));
+
+                // L'ID est généré automatiquement par la base de données, on ne l'inclut pas dans l'ajout
+                Attraction newAttraction = new Attraction(nom, parc, prix, description);
+                attractionDAO.addAttraction(newAttraction);
 
                 JOptionPane.showMessageDialog(this, "Attraction ajoutée avec succès !");
             } catch (NumberFormatException ex) {
