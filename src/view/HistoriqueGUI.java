@@ -2,14 +2,11 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import dao.ClientDAO;
-import dao.ReservationDAO;  // Ajoutez cette ligne pour importer ReservationDAO
+import dao.ReservationDAO;
 import model.Client;
-import model.Profil;
-import model.Reservation; // Assurez-vous d'importer la classe Reservation
-import java.util.List;
+import model.Reservation;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class HistoriqueGUI extends JFrame {
 
@@ -30,7 +27,7 @@ public class HistoriqueGUI extends JFrame {
 
         // Récupérer l'historique des réservations
         ReservationDAO reservationDAO = new ReservationDAO();
-        List<Reservation> reservations = reservationDAO.getReservationsByClient(client);  // Appel correct
+        List<Reservation> reservations = reservationDAO.getReservationsByClient(client);  // Appel correct de la méthode
 
         String[] columnNames = {"ID", "Attraction", "Date", "Prix"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);

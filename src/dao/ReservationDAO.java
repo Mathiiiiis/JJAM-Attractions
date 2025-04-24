@@ -1,20 +1,11 @@
 package dao;
 
-import model.Reservation;
 import model.Client;
+import model.Reservation;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DBConnection;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import dao.ClientDAO;
-import model.Client;
-import model.Profil;
-import java.util.ArrayList;
-import dao.ClientDAO;
-
 
 public class ReservationDAO {
 

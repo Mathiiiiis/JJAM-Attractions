@@ -1,36 +1,64 @@
 package model;
 
 public class Attraction {
+
     private int id;
     private String nom;
     private String parc;
     private double prixBase;
-    private String type;
     private String description;
 
-
-    public Attraction(int id, String nom, String parc, double prixBase, String type) {
-        this.id = id;
-        this.nom = nom;
-        this.parc = parc;
-        this.prixBase = prixBase;
-        this.type = type;
+    // Constructeur sans paramètres
+    public Attraction() {
     }
 
-    public int getId() { return id; }
-    public String getNom() { return nom; }
-    public String getParc() { return parc; }
-    public double getPrixBase() { return prixBase; }
-    public String getType() { return type; }
-    public Attraction(String nom, String parc, double prixBase, String description) {
+    // Constructeur avec paramètres pour initialiser l'attraction
+    public Attraction(int id, String nom, String parc, double prixBase, String description) {
+        this.id = id;
         this.nom = nom;
         this.parc = parc;
         this.prixBase = prixBase;
         this.description = description;
     }
+
+    // Getters et Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getParc() {
+        return parc;
+    }
+
+    public void setParc(String parc) {
+        this.parc = parc;
+    }
+
+    public double getPrixBase() {
+        return prixBase;
+    }
+
+    public void setPrixBase(double prixBase) {
+        this.prixBase = prixBase;
+    }
+
     public String getDescription() {
         return description;
     }
 
-
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
