@@ -1,3 +1,4 @@
+
 package view;
 
 import javax.swing.*;
@@ -5,15 +6,14 @@ import java.awt.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.Period;
 
 import dao.ClientDAO;
 import model.Client;
 import model.Profil;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 
 public class InscriptionGUI extends JFrame {
     public InscriptionGUI() {
@@ -35,7 +35,6 @@ public class InscriptionGUI extends JFrame {
         JTextField emailField = new JTextField(20);
         JPasswordField passField = new JPasswordField(20);
 
-        // Création d'un champ de saisie pour la date au format JJ/MM/AAAA
         JFormattedTextField dobField = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
         dobField.setColumns(10);
 
@@ -49,16 +48,13 @@ public class InscriptionGUI extends JFrame {
 
         registerBtn.addActionListener(e -> {
             try {
-                // Récupérer la date de naissance entrée par l'utilisateur (format : JJ/MM/AAAA)
                 String dobStr = dobField.getText();
                 DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 Date dateOfBirth = formatter.parse(dobStr);
 
-                // Calcul de l'âge à partir de la date de naissance
                 LocalDate birthDate = new java.sql.Date(dateOfBirth.getTime()).toLocalDate();
                 int age = Period.between(birthDate, LocalDate.now()).getYears();
 
-                // Déterminer le profil (Enfant, Senior, Adulte)
                 Profil profil = (age < 18) ? Profil.ENFANT : (age > 60) ? Profil.SENIOR : Profil.REGULIER;
 
                 ClientDAO clientDAO = new ClientDAO();
@@ -70,15 +66,13 @@ public class InscriptionGUI extends JFrame {
                 );
 
                 if (ok) {
-                    // Après l'inscription réussie, récupérer le client
                     Client client = clientDAO.getClientByEmailAndPassword(
                             emailField.getText(),
                             new String(passField.getPassword())
                     );
                     JOptionPane.showMessageDialog(this, "Inscription réussie !");
-                    // Passer le client au ReservationGUI
-                    new ReservationGUI(client, new ArrayList<>()).setVisible(true);
-                    dispose();  // Fermer la fenêtre d'inscription
+                    new PageCalendrier(client).setVisible(true);
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Erreur lors de l'inscription.");
                 }

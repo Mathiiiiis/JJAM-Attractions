@@ -1,140 +1,89 @@
+
 package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
 import model.Client;
-import model.Profil;
-import model.Attraction;
+import view.ConfirmationGUI.Ticket;
 
 public class ConfirmationGUI extends JFrame {
 
     public static class Ticket {
-        private final Attraction attraction;
-        private final Profil profil;
-        private final double prixFinal;
-        private final boolean hasFastPass;
+        private final model.Attraction attraction;
+        private final model.Profil profil;
+        private final double prix;
+        private final boolean fastPass;
 
-        // Constructeur modifié pour accepter prixFinal et FastPass
-        public Ticket(Attraction attraction, Profil profil, double prixFinal, boolean hasFastPass) {
+        public Ticket(model.Attraction attraction, model.Profil profil, double prix, boolean fastPass) {
             this.attraction = attraction;
             this.profil = profil;
-            this.prixFinal = prixFinal;
-            this.hasFastPass = hasFastPass;
+            this.prix = prix;
+            this.fastPass = fastPass;
         }
 
-        public double getPrixFinal() {
-            return prixFinal;
-        }
-
-        public Attraction getAttraction() {
+        public model.Attraction getAttraction() {
             return attraction;
         }
 
-        public Profil getProfil() {
+        public model.Profil getProfil() {
             return profil;
         }
 
-        public boolean hasFastPass() {
-            return hasFastPass;
+        public double getPrix() {
+            return prix;
+        }
+
+        public boolean isFastPass() {
+            return fastPass;
         }
     }
 
-    public ConfirmationGUI(Client client, List<Ticket> tickets, double prixTotal) {
+    public ConfirmationGUI(Client client, List<Ticket> tickets, double prixTotal, LocalDate dateChoisie) {
         super("Confirmation de Réservation");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        setSize(600, 400);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(245, 250, 255));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+        JPanel panel = new JPanel(new BorderLayout());
+        JLabel title = new JLabel("Confirmation", SwingConstants.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+        panel.add(title, BorderLayout.NORTH);
 
-        JLabel titre = new JLabel("✔️ Réservation confirmée");
-        titre.setFont(new Font("SansSerif", Font.BOLD, 20));
-        titre.setForeground(new Color(0, 102, 204));
-        titre.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel clientLabel = new JLabel("Client : " + (client != null ? client.getNom() : "Invité"));
-        clientLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel sousTitre = new JLabel("Attractions réservées :");
-        sousTitre.setFont(new Font("SansSerif", Font.BOLD, 16));
-        sousTitre.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        panel.add(titre);
-        panel.add(Box.createVerticalStrut(10));
-        panel.add(clientLabel);
-        panel.add(Box.createVerticalStrut(20));
-        panel.add(sousTitre);
-        panel.add(Box.createVerticalStrut(10));
-
-        // Regrouper les tickets par attraction et profil
-        Map<String, Map<Profil, Long>> regroupement = tickets.stream()
-                .collect(Collectors.groupingBy(
-                        t -> t.getAttraction().getNom() + " (" + t.getAttraction().getParc() + ")",
-                        Collectors.groupingBy(Ticket::getProfil, Collectors.counting())
-                ));
-
-        for (String nomAttraction : regroupement.keySet()) {
-            JPanel bloc = new JPanel(new BorderLayout());
-            bloc.setBackground(Color.WHITE);
-            bloc.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-
-            JLabel nom = new JLabel("🎢 " + nomAttraction);
-            nom.setFont(new Font("SansSerif", Font.BOLD, 14));
-            bloc.add(nom, BorderLayout.NORTH);
-
-            JPanel details = new JPanel();
-            details.setLayout(new BoxLayout(details, BoxLayout.Y_AXIS));
-            details.setBackground(Color.WHITE);
-
-            for (Map.Entry<Profil, Long> entry : regroupement.get(nomAttraction).entrySet()) {
-                String libelle = switch (entry.getKey()) {
-                    case ENFANT -> "Enfant";
-                    case SENIOR -> "Senior";
-                    case REGULIER -> "Adulte";
-                };
-                JLabel ticketInfo = new JLabel("- " + entry.getValue() + " x " + libelle);
-                details.add(ticketInfo);
+        JTextArea ticketArea = new JTextArea();
+        ticketArea.setEditable(false);
+        tickets.forEach(ticket -> {
+            ticketArea.append("🎟️ " + ticket.getAttraction().getNom() + " - " +
+                    ticket.getProfil() + " - " + ticket.getPrix() + " €");
+            if (ticket.isFastPass()) {
+                ticketArea.append(" [FastPass]");
             }
+            ticketArea.append("\n");
+        });
 
-            bloc.add(details, BorderLayout.CENTER);
-            panel.add(bloc);
-        }
-
-        panel.add(Box.createVerticalStrut(20));
-
-        JLabel total = new JLabel("💶 Prix total à payer : " + String.format("%.2f", prixTotal) + " €");
-        total.setFont(new Font("SansSerif", Font.BOLD, 16));
-        total.setForeground(new Color(0, 128, 0));
-        total.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        panel.add(total);
-        panel.add(Box.createVerticalStrut(30));
+        panel.add(new JScrollPane(ticketArea), BorderLayout.CENTER);
 
         JPanel boutons = new JPanel();
-        boutons.setBackground(new Color(245, 250, 255));
 
-        JButton retour = new JButton("← Retour à l'accueil");
-        retour.addActionListener(e -> {
-            new AccueilGUI().setVisible(true);
+        JButton continuer = new JButton("⏎ Continuer la réservation");
+        continuer.addActionListener(e -> {
+            new ReservationGUI(client, tickets, dateChoisie).setVisible(true);
             dispose();
         });
 
-        JButton continuer = new JButton("↻ Continuer la réservation");
-        continuer.addActionListener(e -> {
-            new ReservationGUI(client, tickets).setVisible(true);  // Passer le panier avec les tickets
+        JButton retour = new JButton("← Retour à l'accueil");
+        retour.addActionListener(e -> {
+            new MenuPrincipal().setVisible(true);
             dispose();
         });
 
         boutons.add(continuer);
         boutons.add(retour);
 
-        panel.add(boutons);
+        panel.add(boutons, BorderLayout.SOUTH);
         add(panel);
     }
 }

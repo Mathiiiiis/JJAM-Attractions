@@ -1,86 +1,90 @@
-package view;
+/*package view;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.List;
+import dao.DateSpecifiqueDAO;
+import model.DateSpecifique;
+import model.Client;
+import model.Ticket;
+import java.util.ArrayList;
 
 public class CalendarGUI extends JFrame {
 
-    private final JPanel calendarPanel;
-    private final Map<String, String> attractionAvailability;
+    private List<DateSpecifique> datesSpecifiques;
 
     public CalendarGUI() {
-        super("Calendrier de Disponibilité");
-
-        // Configuration de la fenêtre principale
+        setTitle("Sélectionner une date");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Panneau du calendrier
-        calendarPanel = new JPanel(new GridLayout(0, 7)); // 7 colonnes pour les jours de la semaine
-        calendarPanel.setBackground(new Color(240, 240, 240));
+        // Récupérer les dates spécifiques depuis la base de données
+        DateSpecifiqueDAO dateSpecifiqueDAO = new DateSpecifiqueDAO();
+        datesSpecifiques = dateSpecifiqueDAO.getAllDatesSpecifiques();
 
-        // Initialisation des données de disponibilité des attractions
-        attractionAvailability = new HashMap<>();
-        attractionAvailability.put("2025-04-25", "Montagne Russe");
-        attractionAvailability.put("2025-04-26", "Parcours Aventure");
+        // Création du JCalendar
+        JCalendar calendar = new JCalendar();
+        calendar.setWeekOfYearVisible(false);
 
-        // Ajouter les jours de la semaine
-        String[] daysOfWeek = {"Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"};
-        for (String day : daysOfWeek) {
-            JLabel label = new JLabel(day, SwingConstants.CENTER);
-            label.setFont(new Font("SansSerif", Font.BOLD, 14));
-            label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            calendarPanel.add(label);
-        }
-
-        // Générer les jours du mois (exemple pour avril 2025)
-        LocalDate startDate = LocalDate.of(2025, 4, 1);
-        int daysInMonth = startDate.lengthOfMonth();
-        int startDayOfWeek = startDate.getDayOfWeek().getValue();
-
-        // Ajouter les cases vides avant le premier jour du mois
-        for (int i = 0; i < startDayOfWeek - 1; i++) {
-            calendarPanel.add(new JLabel(" "));
-        }
-
-        // Ajouter les jours du mois
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        for (int day = 1; day <= daysInMonth; day++) {
-            LocalDate date = LocalDate.of(2025, 4, day);
-            String formattedDate = date.format(formatter);
-
-            JButton dayButton = new JButton(String.valueOf(day));
-            dayButton.setFont(new Font("SansSerif", Font.PLAIN, 12));
-            dayButton.setBackground(Color.WHITE);
-            dayButton.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-
-            // Vérifier la disponibilité de l'attraction pour cette date
-            if (attractionAvailability.containsKey(formattedDate)) {
-                dayButton.setBackground(Color.GREEN);
-                dayButton.addActionListener(e -> {
-                    String attraction = attractionAvailability.get(formattedDate);
-                    JOptionPane.showMessageDialog(this, "Attraction disponible: " + attraction);
-                });
-            } else {
-                dayButton.addActionListener(e -> {
-                    JOptionPane.showMessageDialog(this, "Aucune attraction disponible.");
-                });
+        // Ajouter des dates spéciales
+        calendar.getDayChooser().addDateEvaluator(date -> {
+            // Colorier les lundis en gris avec "Parc fermé"
+            if (date.getDayOfWeek().getValue() == 1) {
+                return new java.awt.Color(192, 192, 192); // Couleur gris
+            }
+            // Colorier les weekends (samedi et dimanche) en bleu
+            else if (date.getDayOfWeek().getValue() == 6 || date.getDayOfWeek().getValue() == 7) {
+                return new java.awt.Color(173, 216, 230); // Bleu clair pour les weekends
             }
 
-            calendarPanel.add(dayButton);
-        }
+            // Vérifier si c'est un jour spécial
+            for (DateSpecifique dateSpecifique : datesSpecifiques) {
+                if (dateSpecifique.getDate().equals(date)) {
+                    // Changer la couleur en rouge pour les jours spéciaux
+                    return new java.awt.Color(255, 99, 71);
+                }
+            }
 
-        add(calendarPanel, BorderLayout.CENTER);
+            return null;
+        });
+
+        // Ajouter l'action lors du clic sur une date
+        calendar.getDayChooser().addPropertyChangeListener(evt -> {
+            if ("day".equals(evt.getPropertyName())) {
+                LocalDate currentDate = LocalDate.of(calendar.getYear(), calendar.getMonth() + 1, calendar.getDay());
+
+                // Créer un client fictif ou utiliser un client existant
+                Client client = new Client();
+                client.setNom("Client Exemple");
+                client.setEmail("client@example.com");
+                // Ajouter des informations supplémentaires si nécessaire
+
+                // Créer une liste de tickets vide (ou ajouter les tickets sélectionnés)
+                List<Ticket> panier = new ArrayList<>();
+
+                // Rediriger vers l'écran de réservation avec la date sélectionnée
+                new ReservationGUI(client, panier, currentDate).setVisible(true);
+                dispose(); // Fermer le calendrier après sélection
+            }
+        });
+
+        // Ajouter le calendrier dans un panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(calendar, BorderLayout.CENTER);
+
+        // Ajouter un bouton pour fermer le calendrier
+        JButton closeBtn = new JButton("Fermer");
+        closeBtn.addActionListener(e -> dispose());
+        panel.add(closeBtn, BorderLayout.SOUTH);
+
+        add(panel);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new CalendarGUI().setVisible(true);
-        });
+        SwingUtilities.invokeLater(() -> new CalendarGUI().setVisible(true));
     }
 }
+*/
