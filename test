@@ -65,6 +65,8 @@ public class ParcDAO {
         }
     }
 
+
+
     // ➖ Supprimer un parc
     public void deleteParc(String nom) {
         String sql = "DELETE FROM parcs WHERE nom = ?";
