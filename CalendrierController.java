@@ -1,4 +1,4 @@
-//ce fichier va nous être utile pour:
+//ce fichier va nous être utile pour: Ccontroler le calendrier 
 package controller;
 
 import dao.CalendrierDAO;
