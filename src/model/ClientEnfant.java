@@ -1,6 +1,6 @@
 package model;
 
-public class ClientEnfant extends Client {
+public class ClientEnfant extends Client { 
 
     public ClientEnfant() {
         this.profil = Profil.ENFANT;  // Attribuer le profil spécifique
