@@ -1,5 +1,5 @@
 package model;
-
+//ce fichier va nous être utile pour:
 import java.time.LocalDate;
 
 public class Reservation {
