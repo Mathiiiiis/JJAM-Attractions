@@ -1,5 +1,5 @@
 package view;
-
+//ce fichier va nous être utile pour:
 import dao.ReservationStatsDAO;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
