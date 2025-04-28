@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
+
 public class StatistiquesGUI extends JFrame {
     public StatistiquesGUI() {
         setTitle("Statistiques d'Occupation des Attractions");
