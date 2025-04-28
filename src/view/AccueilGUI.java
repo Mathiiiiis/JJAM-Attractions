@@ -21,6 +21,7 @@ public class AccueilGUI extends JFrame {
         add(welcomeLabel, BorderLayout.NORTH);
 
         // Panel central pour les boutons
+        //bouton
         JPanel centerPanel = new JPanel(new GridLayout(2, 2, 30, 30));
         centerPanel.setBackground(new Color(240, 248, 255)); // bleu très clair
         centerPanel.setBorder(BorderFactory.createEmptyBorder(80, 150, 80, 150));
