@@ -53,7 +53,7 @@ public class AjoutAttractionDialog extends JDialog {
         JButton ajouterButton = new JButton("Ajouter l'attraction");
         add(new JLabel()); // espace vide pour aligner
         add(ajouterButton);
-
+//
         // Action sur le bouton
         ajouterButton.addActionListener(new ActionListener() {
             @Override
