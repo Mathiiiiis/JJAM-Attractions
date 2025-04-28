@@ -1,7 +1,7 @@
 package dao;
 
 import model.Client;
-import model.Reservation;
+import model.Reservation;//ce fichier va nous être utile pour:
 import model.Ticket;
 import model.Attraction;
 import utils.DBConnection;
