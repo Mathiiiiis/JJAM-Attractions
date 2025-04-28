@@ -3,7 +3,7 @@ package dao;
 import model.Attraction;
 import utils.DBConnection;
 
-import java.sql.*;
+import java.sql.*;//ce fichier va nous être utile pour:
 import java.util.ArrayList;
 import java.util.List;
 
