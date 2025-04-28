@@ -10,3 +10,4 @@ public interface AttractionDAO {
     void updateAttraction(Attraction a);
     void deleteAttraction(int id);
 }
+//ce fichier va nous être utile pour:
