@@ -2,7 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main
 {
-    public static void main(String[] args) {
+    public static void main(String[] args) {//ce fichier va nous être utile pour:
         //déclaration d'une référence pour un étudiant
         Etudiant e1, e2, e3,e4;
         // création d'un objet étudiant
