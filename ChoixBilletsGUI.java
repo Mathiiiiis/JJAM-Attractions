@@ -116,7 +116,7 @@ public class ChoixBilletsGUI extends JFrame {
             if (clientSupp != null) {
                 billet.setClient(clientSupp);
             }
-
+//
             billets.add(billet);
             billetPanelContainer.add(billet);
             billetPanelContainer.revalidate();
