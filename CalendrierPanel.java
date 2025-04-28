@@ -51,7 +51,7 @@ public class CalendrierPanel extends JPanel {
                 boutonJour.setBackground(Color.CYAN);
                 boutonJour.setToolTipText("Week-end : horaires normaux");
             }
-
+//
             add(boutonJour);
         }
     }
