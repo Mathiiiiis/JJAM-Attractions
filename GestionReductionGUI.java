@@ -1,5 +1,5 @@
 package view;
-
+//ce fichier va nous être utile pour:
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
