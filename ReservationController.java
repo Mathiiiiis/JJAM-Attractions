@@ -1,6 +1,6 @@
 package controller;
 
-import model.Attraction;
+import model.Attraction;//ce fichier va nous être utile pour:
 import model.Client;
 import model.Parc;
 import model.Profil;
