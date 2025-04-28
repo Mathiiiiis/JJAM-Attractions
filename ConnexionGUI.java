@@ -1,5 +1,5 @@
 package view;
-
+//ce fichier va nous être utile pour:
 import dao.ClientDAO;
 import model.Client;
 
