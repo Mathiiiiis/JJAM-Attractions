@@ -29,7 +29,7 @@ public class CalendrierReservationGUI extends JFrame {
         titre.setFont(new Font("SansSerif", Font.BOLD, 20));
         add(titre, BorderLayout.NORTH);
 
-        // Exemple basique : calendrier fictif
+        // Exemple  
         JPanel calendarPanel = new JPanel();
         calendarPanel.add(new JLabel("Ici votre composant de calendrier..."));
         add(calendarPanel, BorderLayout.CENTER);
