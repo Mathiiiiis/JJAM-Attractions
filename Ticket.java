@@ -1,5 +1,5 @@
 package model;
-
+//ce fichier va nous être utile pour:
 public class Ticket {
     private String nom;
     private String profil;
