@@ -99,7 +99,7 @@ public class ChoixBilletsInviteGUI extends JFrame {
             billetPanelContainer.repaint();
         }
     }
-
+//
     public List<TicketPanel> getBillets() {
         return billets;
     }
