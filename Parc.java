@@ -1,5 +1,5 @@
 package model;
-
+//ce fichier va nous être utile pour:
 import java.util.List;
 
 public class Parc {
