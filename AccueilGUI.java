@@ -5,6 +5,9 @@ import java.awt.*;
 //
 public class AccueilGUI extends JFrame {
 
+
+    
+
     public AccueilGUI() {
         super("Accueil - Parc d'Attractions");
         setSize(800, 600); // 📏 Plus spacieux
