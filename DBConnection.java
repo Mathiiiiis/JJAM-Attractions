@@ -21,4 +21,4 @@ public class DBConnection {
             return null;  // Retourne null si la connexion échoue
         }
     }
-}
+}//ce fichier va nous être utile pour:
