@@ -56,7 +56,7 @@ public class AjoutBilletDialog extends JDialog {
         formDialog.add(profilCombo);
         formDialog.add(validerBtn);
         formDialog.add(annulerBtn);
-
+//
         validerBtn.addActionListener(e -> {
             nom = nomField.getText().trim();
             profil = (Profil) profilCombo.getSelectedItem();
