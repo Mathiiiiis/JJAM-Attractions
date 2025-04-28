@@ -12,6 +12,7 @@ public class Main
         float tab[]=new float[2];
         tab[0]=12.5f;
         tab[1]=17;
+        
         e4 = new Etudiant("machin",13,tab);
         e1.afficherEtudiant();
         e4.afficherEtudiant();
