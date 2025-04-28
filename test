@@ -1,0 +1,82 @@
+package dao;
+
+import utils.DBConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;//ce fichier va nous être utile pour:
+
+public class ParcDAO {
+
+    // Récupérer la capacité d'un parc
+    public int getCapaciteParc(String parcNom) {
+        String sql = "SELECT capacite FROM parcs WHERE nom = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, parcNom);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("capacite");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Retourne 0 si pas trouvé
+    }
+
+    // Récupérer tous les noms de parcs
+    public List<String> getAllParcNames() {
+        List<String> parcs = new ArrayList<>();
+        String sql = "SELECT nom FROM parcs";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                parcs.add(rs.getString("nom"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return parcs;
+    }
+
+    // ➕ Ajouter un parc
+    public void addParc(String nom, int capacite, double prixEntree) {
+        String sql = "INSERT INTO parcs (nom, capacite, prix_entree) VALUES (?, ?, ?)";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nom);
+            stmt.setInt(2, capacite);
+            stmt.setDouble(3, prixEntree);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ➖ Supprimer un parc
+    public void deleteParc(String nom) {
+        String sql = "DELETE FROM parcs WHERE nom = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nom);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
