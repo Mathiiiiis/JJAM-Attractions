@@ -33,7 +33,7 @@ public class ClientListGUI extends JFrame {
                         client.getId(),
                         client.getNom(),
                         client.getEmail(),
-                        client.getProfil().name()  // Assurez-vous que Profil est une enum avec une méthode name()
+                        client.getProfil().name()
                 });
             }
         }
