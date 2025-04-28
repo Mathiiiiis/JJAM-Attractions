@@ -5,7 +5,7 @@ import model.Profil;
 
 import javax.swing.*;
 import java.awt.*;
-
+//ce fichier va nous être utile pour:
 public class ProfileGUI extends JPanel {
     private Client client;
 
