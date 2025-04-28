@@ -43,7 +43,7 @@ public class AttractionDAOImpl {
             stmt.setString(2, a.getParc());
             stmt.setDouble(3, a.getPrixBase());
             stmt.setString(4, a.getDescription());
-            stmt.executeUpdate();
+            stmt.executeUpdate() ;
         } catch (SQLException e) {
             e.printStackTrace();
         }
