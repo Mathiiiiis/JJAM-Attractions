@@ -10,7 +10,7 @@ public class AttractionDAOImpl {
     // Méthode pour récupérer toutes les attractions
     public List<Attraction> getAllAttractions() {
         List<Attraction> list = new ArrayList<>();
-        String sql = "SELECT * FROM attractions";
+        String sql = "SELECT * FROM attractions";// Recherche dans la BDD
 
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement();
