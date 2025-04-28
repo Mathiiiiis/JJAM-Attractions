@@ -1,6 +1,6 @@
 
 package dao;
-
+//ce fichier va nous être utile pour:
 import model.DateEvenement;
 
 import java.sql.*;
