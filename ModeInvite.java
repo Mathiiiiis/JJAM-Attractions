@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-
+//ce fichier va nous être utile pour:
 public class ModeInvite extends JFrame {
 
     public ModeInvite() {
