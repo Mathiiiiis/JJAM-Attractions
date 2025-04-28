@@ -10,7 +10,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
-
+//
 public class AdminGUI extends JFrame {
     private final AttractionDAOImpl attractionDAO = new AttractionDAOImpl();
     private final ReservationDAO reservationDAO = new ReservationDAO();
