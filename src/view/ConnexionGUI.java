@@ -18,7 +18,7 @@ public class ConnexionGUI extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(new Color(245, 245, 255));
-        panel.setBorder(BorderFactory.createEmptyBorder(59, 150, 60, 150));
+        panel.setBorder(BorderFactory.createEmptyBorder(60, 150, 60, 150));
 
         JLabel title = new JLabel("Connexion Client");
         title.setFont(new Font("SansSerif", Font.BOLD, 22));
