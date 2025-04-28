@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Date;
-
+//ce fichier va nous être utile pour:
 public class Commande {
 
     private int id;
