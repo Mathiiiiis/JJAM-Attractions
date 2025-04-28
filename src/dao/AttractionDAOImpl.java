@@ -48,6 +48,60 @@ public class AttractionDAOImpl {
             e.printStackTrace();
         }
     }
+    public void deleteAttraction(int id) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("DELETE FROM attractions WHERE id = ?")) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateAttraction(Attraction attraction) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("UPDATE attractions SET nom = ?, parc = ?, prix_base = ?, description = ? WHERE id = ?")) {
+            stmt.setString(1, attraction.getNom());
+            stmt.setString(2, attraction.getParc());
+            stmt.setDouble(3, attraction.getPrixBase());
+            stmt.setString(4, attraction.getDescription());
+            stmt.setInt(5, attraction.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public Attraction getAttractionByName(String name) {
+        Attraction attraction = null;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM attractions WHERE nom = ?")) {
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                attraction = new Attraction(
+                        rs.getString("nom"),
+                        rs.getString("parc"),
+                        rs.getDouble("prix_base"),
+                        rs.getString("description"),
+                        rs.getInt("places") // Attention adapte si ton champ s'appelle autrement
+                );
+                attraction.setId(rs.getInt("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return attraction;
+    }
+
+    public void deleteAttractionByName(String name) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("DELETE FROM attractions WHERE nom = ?")) {
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Méthode pour récupérer une attraction par son ID
     public Attraction getAttractionById(int id) {

@@ -1,4 +1,3 @@
-
 package view;
 
 import controller.CalendrierController;
@@ -176,4 +175,3 @@ public class PageCalendrier extends JFrame {
         return panel;
     }
 }
-

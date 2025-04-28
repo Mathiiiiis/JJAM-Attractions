@@ -1,47 +1,80 @@
-
 package view;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class AccueilGUI extends JFrame {
     public AccueilGUI() {
-        super("Accueil Parc Attractions");
-        setSize(400, 300);
-        setLocationRelativeTo(null);
+        super("Bienvenue au Parc de l'ECE !");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new java.awt.GridLayout(4, 1, 10, 10));
+        setLayout(new BorderLayout());
 
-        JButton register = new JButton("S'inscrire");
-        JButton guest = new JButton("Continuer en tant qu'invité");
-        JButton login = new JButton("Se connecter");
-        JButton admin = new JButton("Accès administrateur");
+        // Bandeau de bienvenue
+        JLabel welcomeLabel = new JLabel("Bienvenue au Parc de l'ECE  !", SwingConstants.CENTER);
+        welcomeLabel.setFont(new Font("SansSerif", Font.BOLD, 40));
+        welcomeLabel.setForeground(Color.WHITE);
+        welcomeLabel.setOpaque(true);
+        welcomeLabel.setBackground(new Color(0, 120, 215)); // bleu doux
+        welcomeLabel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        add(welcomeLabel, BorderLayout.NORTH);
 
-        register.addActionListener((ActionEvent e) -> {
+        // Panel central pour les boutons
+        JPanel centerPanel = new JPanel(new GridLayout(2, 2, 30, 30));
+        centerPanel.setBackground(new Color(240, 248, 255)); // bleu très clair
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(80, 150, 80, 150));
+
+        JButton registerBtn = createStyledButton("S'inscrire");
+        JButton guestBtn = createStyledButton("Continuer en tant qu'invité");
+        JButton loginBtn = createStyledButton("Se connecter");
+        JButton adminBtn = createStyledButton("Accès administrateur");
+
+        centerPanel.add(registerBtn);
+        centerPanel.add(guestBtn);
+        centerPanel.add(loginBtn);
+        centerPanel.add(adminBtn);
+
+        add(centerPanel, BorderLayout.CENTER);
+
+        // Actions boutons
+        registerBtn.addActionListener((ActionEvent e) -> {
             new InscriptionGUI().setVisible(true);
             dispose();
         });
 
-        guest.addActionListener((ActionEvent e) -> {
-            new ReservationGUI(null, new ArrayList<>(), LocalDate.now()).setVisible(true);
+        guestBtn.addActionListener((ActionEvent e) -> {
+            new PageCalendrier(null).setVisible(true);
             dispose();
         });
 
-        login.addActionListener((ActionEvent e) -> {
+        loginBtn.addActionListener((ActionEvent e) -> {
             new ConnexionGUI().setVisible(true);
             dispose();
         });
 
-        admin.addActionListener((ActionEvent e) -> {
-            new AdminGUI().setVisible(true);
-            dispose();
+        adminBtn.addActionListener((ActionEvent e) -> {
+            String motDePasse = JOptionPane.showInputDialog(this, "Veuillez entrer le mot de passe administrateur :");
+            if (motDePasse != null && motDePasse.equals("admin")) {
+                new AdminGUI().setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Mot de passe incorrect !");
+            }
         });
+    }
 
-        add(register);
-        add(guest);
-        add(login);
-        add(admin);
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("SansSerif", Font.BOLD, 22));
+        button.setBackground(new Color(0, 150, 136)); // vert d'eau moderne
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        return button;
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new AccueilGUI().setVisible(true));
     }
 }

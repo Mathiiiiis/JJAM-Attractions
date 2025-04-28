@@ -47,4 +47,23 @@ public class ReservationDAO {
 
         return reservations;  // Retourne la liste des réservations pour ce client
     }
+    // Compter le nombre de réservations pour une attraction
+    public int countReservationsByAttractionId(int attractionId) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM reservations WHERE attraction_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, attractionId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL : " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return count;
+    }
 }
