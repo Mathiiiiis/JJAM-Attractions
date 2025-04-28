@@ -7,7 +7,7 @@ public class Attraction {
     private String parc;
     private double prixBase;
     private String description;
-    private int capacite; // ✅ Nouveau champ capacité ajouté
+    private int capacite; 
 
     // Constructeur sans paramètres
     public Attraction() {
