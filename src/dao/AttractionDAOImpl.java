@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List; 
 
 public class AttractionDAOImpl {
-
     // Méthode pour récupérer toutes les attractions
     public List<Attraction> getAllAttractions() {
         List<Attraction> list = new ArrayList<>();
