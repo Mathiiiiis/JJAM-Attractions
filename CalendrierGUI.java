@@ -37,7 +37,7 @@ public class CalendrierGUI extends JFrame {
 
         JButton confirmer = new JButton("Confirmer");
         add(confirmer, BorderLayout.SOUTH);
-
+//
         confirmer.addActionListener(e -> {
             LocalDate date = LocalDate.parse(((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().getText());
             new RecapitulatifGUI(parcsChoisis, tickets, date);
