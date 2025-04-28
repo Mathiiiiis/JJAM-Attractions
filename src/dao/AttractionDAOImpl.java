@@ -3,7 +3,7 @@ package dao;
 import model.Attraction;
 import utils.DBConnection;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List; 
   
 public class AttractionDAOImpl { 
