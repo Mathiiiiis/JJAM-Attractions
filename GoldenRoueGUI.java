@@ -1,5 +1,5 @@
 package view;
-
+//ce fichier va nous être utile pour:
 import model.Client;
 
 import javax.swing.*;
