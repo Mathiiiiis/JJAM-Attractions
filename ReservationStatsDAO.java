@@ -3,7 +3,7 @@ package dao;
 import utils.DBConnection;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.PreparedStatement;//ce fichier va nous être utile pour:
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
