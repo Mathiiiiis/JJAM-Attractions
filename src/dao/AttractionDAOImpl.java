@@ -4,7 +4,7 @@ import model.Attraction;
 import utils.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List; //fd
+import java.util.List; //
   
 public class AttractionDAOImpl { 
     // Méthode pour récupérer toutes les attractions DANS LA BDD
