@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ParcDAOImpl implements ParcDAOInterface {
     private Connection connection;
-
+//ce fichier va nous être utile pour:
     public ParcDAOImpl(Connection connection) {
         this.connection = connection;
     }
