@@ -5,7 +5,7 @@ import utils.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List; 
-
+  
 public class AttractionDAOImpl { 
     // Méthode pour récupérer toutes les attractions
     public List<Attraction> getAllAttractions() {
