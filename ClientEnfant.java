@@ -1,5 +1,5 @@
 package model;
-
+//ce fichier va nous être utile pour:
 public class ClientEnfant extends Client {
 
     public ClientEnfant(Client client) {
