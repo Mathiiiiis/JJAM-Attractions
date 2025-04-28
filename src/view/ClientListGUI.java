@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.List;
 import dao.ClientDAO;
 import model.Client;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel //
 
 public class ClientListGUI extends JFrame {
 
